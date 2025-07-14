@@ -17,6 +17,7 @@ const bucketsStyles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#004D40',
+    textAlign: 'center',
   },
 });
 

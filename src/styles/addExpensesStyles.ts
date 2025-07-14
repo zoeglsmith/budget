@@ -17,6 +17,7 @@ const addExpenseStyles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     color: '#A0522D',
+    textAlign: 'center',
   },
 });
 

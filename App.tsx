@@ -1,33 +1,42 @@
 import React from "react";
-import { View, Text, Button, StatusBar } from "react-native";
-import styles from "./src/styles/homeStyles";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-type HomeScreenProps = {
-  navigation: {
-    navigate: (screen: string) => void;
-  };
+import HomeScreen from "./src/screens/HomeScreen";
+import AddExpenseScreen from "./src/screens/AddExpenseScreen";
+import BucketsScreen from "./src/screens/BucketsScreen";
+
+export type RootStackParamList = {
+  Home: undefined;
+  AddExpense: undefined;
+  Buckets: undefined;
 };
 
-export default function HomeScreen({ navigation }: HomeScreenProps) {
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      <Text style={styles.title}>💰 Budget App</Text>
-      <Text style={styles.subtitle}>Welcome to your budget dashboard.</Text>
-
-      <View style={{ marginTop: 20, width: "80%" }}>
-        <Button
-          title="Add Expense"
-          onPress={() => navigation.navigate("AddExpense")}
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{ headerTitleAlign: "center" }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Budget Dashboard" }}
         />
-      </View>
-
-      <View style={{ marginTop: 10, width: "80%" }}>
-        <Button
-          title="View Buckets"
-          onPress={() => navigation.navigate("Buckets")}
+        <Stack.Screen
+          name="AddExpense"
+          component={AddExpenseScreen}
+          options={{ title: "Add Expense" }}
         />
-      </View>
-    </View>
+        <Stack.Screen
+          name="Buckets"
+          component={BucketsScreen}
+          options={{ title: "Saving Buckets" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
