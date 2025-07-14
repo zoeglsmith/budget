@@ -1,29 +1,33 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, Text, Button, StatusBar } from "react-native";
+import styles from "./src/styles/homeStyles";
 
-import HomeScreen from "./src/screens/HomeScreen";
-import AddExpenseScreen from "./src/screens/AddExpenseScreen";
-import BucketsScreen from "./src/screens/BucketsScreen";
+type HomeScreenProps = {
+  navigation: {
+    navigate: (screen: string) => void;
+  };
+};
 
-const Stack = createNativeStackNavigator();
-
-export default function App() {
+export default function HomeScreen({ navigation }: HomeScreenProps) {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen
-          name="AddExpense"
-          component={AddExpenseScreen}
-          options={{ title: "Add Expense" }}
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <Text style={styles.title}>💰 Budget App</Text>
+      <Text style={styles.subtitle}>Welcome to your budget dashboard.</Text>
+
+      <View style={{ marginTop: 20, width: "80%" }}>
+        <Button
+          title="Add Expense"
+          onPress={() => navigation.navigate("AddExpense")}
         />
-        <Stack.Screen
-          name="Buckets"
-          component={BucketsScreen}
-          options={{ title: "Saving Buckets" }}
+      </View>
+
+      <View style={{ marginTop: 10, width: "80%" }}>
+        <Button
+          title="View Buckets"
+          onPress={() => navigation.navigate("Buckets")}
         />
-      </Stack.Navigator>
-    </NavigationContainer>
+      </View>
+    </View>
   );
 }
